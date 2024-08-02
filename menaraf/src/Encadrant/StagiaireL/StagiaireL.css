@@ -1,0 +1,14 @@
+.order-list table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .order-list th, .order-list td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .order-list input {
+    width: 100%;
+  }
+  

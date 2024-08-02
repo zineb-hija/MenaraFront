@@ -1,0 +1,30 @@
+.dashboard {
+    padding: 20px;
+    background-color: #f5f5f5;
+    flex: 1;
+  }
+  
+  .projects {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .tasks {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .task-column {
+    background-color: #fff;
+    padding: 10px;
+    width: 30%;
+  }
+  
+  .task-column h3 {
+    margin-top: 0;
+  }
+  

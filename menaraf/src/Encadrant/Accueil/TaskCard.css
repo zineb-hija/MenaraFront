@@ -1,0 +1,79 @@
+/* TaskCard.css */
+
+.task-card {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  color: #fff;
+  position: relative; /* Pour positionner le sélecteur de couleurs */
+}
+
+.task-card.blue {
+  background-color: blue;
+}
+
+.task-card.red {
+  background-color: red;
+}
+
+.task-card.green {
+  background-color: green;
+}
+
+.task-card.lightgreen {
+  background-color: lightgreen;
+}
+
+/* Styles pour le sélecteur de couleurs */
+.color-picker {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px;
+  z-index: 1;
+}
+
+.color-swatch {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+}
+
+.color-swatch.blue { background-color: blue; }
+.color-swatch.red { background-color: red; }
+.color-swatch.green { background-color: green; }
+.color-swatch.lightgreen { background-color: lightgreen; }
+.color-swatch.yellow { background-color: yellow; }
+.color-swatch.orange { background-color: orange; }
+
+
+.task-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit-icon {
+  cursor: pointer;
+  margin-left: auto; /* Pour s'assurer qu'il est aligné à droite */
+}
+
+.color-picker {
+  display: flex;
+  margin-top: 5px;
+}
+
+.color-swatch {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  cursor: pointer;
+}

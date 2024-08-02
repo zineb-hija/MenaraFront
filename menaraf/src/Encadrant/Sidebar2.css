@@ -1,0 +1,29 @@
+/* Sidebar.css */
+.sidebar {
+    width: 200px;
+    background-color: #f8f9fa;
+    padding: 20px;
+  }
+  
+  .sidebar .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    cursor: pointer;
+  }
+  
+  .sidebar ul li .icon {
+    margin-right: 10px;
+  }
+  
