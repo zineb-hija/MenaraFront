@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useDrop } from 'react-dnd';
 import TaskCard from './TaskCard';
-import './Dashboard.css';
+import './Dashboard2.css';
 
 const initialTasks = {
   todo: [

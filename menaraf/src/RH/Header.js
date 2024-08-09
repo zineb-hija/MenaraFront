@@ -8,8 +8,8 @@ const Header = () => {
       <div className="notification"><i className="fas fa-bell"></i></div>
       <div className="profile">
         <span>Zineb Hijaoui</span>
-        <span>Admin</span>
-        <img src="profile.jpg" alt="Admin" />
+        <span>RH</span>
+        <img src="profile.jpg" alt="RH" />
       </div>
     </div>
   );

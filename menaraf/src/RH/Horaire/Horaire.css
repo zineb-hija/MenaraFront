@@ -1,0 +1,70 @@
+/* Horaire.css */
+
+div {
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .react-big-calendar {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .react-big-calendar .rbc-toolbar {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .react-big-calendar .rbc-month-view {
+    background-color: #fff;
+  }
+  
+  .react-big-calendar .rbc-month-header {
+    background-color: #f1f1f1;
+  }
+  
+  .react-big-calendar .rbc-event {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #0056b3;
+  }
+  
