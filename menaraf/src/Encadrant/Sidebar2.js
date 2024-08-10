@@ -10,13 +10,13 @@ const Sidebar2 = () => {
     <div className="sidebar">
       <div className="logo">MENARA</div>
       <ul>
-        <li onClick={() => navigate('/')}>
+        <li onClick={() => navigate('/encadrant')}>
           <FaHome className="icon" /> Accueil
         </li>
         <li onClick={() => navigate('/projet')}>
           <FaUserTie className="icon" /> Projet
         </li>
-        <li onClick={() => navigate('/stagiaire')}>
+        <li onClick={() => navigate('/stagiaireL')}>
           <FaUserGraduate className="icon" /> Stagiaire
         </li>
         

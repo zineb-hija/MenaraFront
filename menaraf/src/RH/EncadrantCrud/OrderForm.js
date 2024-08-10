@@ -15,6 +15,8 @@ const OrderForm = ({ formData, setFormData, addOrder, deleteOrder}) => {
       date: '',
       nom: '',
       prenom: '',
+      username:'',
+      password:'',
       email:'',
       departement: ''
     });
@@ -30,6 +32,14 @@ const OrderForm = ({ formData, setFormData, addOrder, deleteOrder}) => {
       <div className="form-group">
         <label>Prenom</label>
         <input type="text" name="prenom" value={formData.prenom} onChange={handleChange} placeholder="Entrez le prenom" />
+      </div>
+      <div className="form-group">
+        <label>Username</label>
+        <input type="text" name="username" value={formData.username} onChange={handleChange} placeholder="Entrez username" />
+      </div>
+      <div className="form-group">
+        <label>Password</label>
+        <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Entrez le password" />
       </div>
       <div className="form-group">
         <label>Email</label>
@@ -48,9 +58,7 @@ const OrderForm = ({ formData, setFormData, addOrder, deleteOrder}) => {
           <option value="GIndustriel">G Industriel</option>
         </select>
       </div>
-      <div className="article-section">
-        <button onClick={addOrder}>Ajouter article</button>
-      </div>
+      
       <div className="action-buttons">
         <button className="add" title="Ajouter" onMouseEnter={() => console.log('Ajouter')} onClick={addOrder}>+</button>
         <button className="save" title="Valider" onMouseEnter={() => console.log('Valider')} onClick={addOrder}>✓</button>

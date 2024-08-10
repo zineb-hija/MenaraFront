@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import OrderList from './OrderList';
 import OrderForm from './OrderForm';
 import './EncadrantC.css';
+import { createOrder, updateOrder } from '../../services/axiosConfig';
+import { getCurrentUser } from '../../services/authService';
 
 function EncadrantC() {
   const [orders, setOrders] = useState([]);
@@ -9,32 +11,46 @@ function EncadrantC() {
     date: '',
     nom: '',
     prenom: '',
+    password:'',
+    username:'',
     email:'',
     departement: ''
   });
   const [selectedOrder, setSelectedOrder] = useState(null);
 
-  const addOrder = () => {
-    if (selectedOrder) {
-      setOrders(orders.map(order => order === selectedOrder ? formData : order));
-      setSelectedOrder(null);
+  const addOrder = async() => {
+    const userId = localStorage.getItem('userId'); // Retrieve as string
+    if (userId) {
+      // Optionally convert to number if needed
+      // const userIdNumber = parseInt(userId, 10);
+      console.log('User ID:', userId); // Check value
     } else {
-      const newOrder = {
-        date: formData.date,
-        nom: formData.nom,
-        prenom: formData.prenom,
-        email: formData.email,
-        departement: formData.departement,
-      };
-      setOrders([...orders, newOrder]);
+      console.error('User ID is missing or invalid');
     }
-    setFormData({
-      date: '',
-      nom: '',
-      prenom: '',
-      email:'',
-      departement: ''
-    });
+    try {
+      if (selectedOrder) {
+        await updateOrder(selectedOrder.id, userId, formData);
+        setOrders(orders.map(order => order === selectedOrder ? formData : order));
+        setSelectedOrder(null);
+
+      } else {
+        // For adding a new order
+        const response = await createOrder(formData, userId);
+        setOrders([...orders, response.data]); 
+      }
+  
+      setFormData({
+        date: '',
+        nom: '',
+        prenom: '',
+        password:'',
+        username:'',
+        email: '',
+        departement: ''
+      });
+    } catch (error) {
+      console.error('Error saving order:', error);
+    }
   };
 
   const handleRowClick = (order) => {
@@ -49,6 +65,8 @@ function EncadrantC() {
         date: '',
         nom: '',
         prenom: '',
+        password:'',
+        username:'',
         email:'',
         departement: ''
       });

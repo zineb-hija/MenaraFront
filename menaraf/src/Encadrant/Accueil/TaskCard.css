@@ -9,19 +9,19 @@
 }
 
 .task-card.blue {
-  background-color: blue;
+  background-color: rgb(187, 143, 206);
 }
 
 .task-card.red {
-  background-color: red;
+  background-color: rgb(231, 76, 60);
 }
 
 .task-card.green {
-  background-color: green;
+  background-color: rgb(247, 220, 111);
 }
 
 .task-card.lightgreen {
-  background-color: lightgreen;
+  background-color: rgb(163, 228, 215);
 }
 
 /* Styles pour le sélecteur de couleurs */
