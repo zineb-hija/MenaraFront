@@ -8,11 +8,9 @@ const OrderList = ({ orders, onRowClick}) => {
       <table>
         <thead>
           <tr>
-           
             <th>NOM</th>
             <th>PRENOM</th>
             <th>USERNAME</th>
-            <th>PASSWORD</th>
             <th>EMAIL</th>
             <th>DATE DE NAISSANCE</th>
             <th>DEPARTEMENT</th>
@@ -25,7 +23,6 @@ const OrderList = ({ orders, onRowClick}) => {
               <td>{order.nom}</td>
               <td>{order.prenom}</td>
               <td>{order.username}</td>
-              <td>{order.password}</td>
               <td>{order.email}</td>
               <td>{order.date}</td>
               <td>{order.departement}</td>

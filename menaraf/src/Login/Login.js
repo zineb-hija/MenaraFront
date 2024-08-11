@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin, faTwitter, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import './Login.css';
+import { getCurrentUser } from '../services/authService';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -16,17 +16,13 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/api/user/login', { username, password });
-      const data = response.data;
-      console.log('Login response data:', data); // Log de la réponse du serveur
-
-      if (data && data.role) { // Vérifiez que `data.role` est défini
-        localStorage.setItem('user', JSON.stringify(data));
-        localStorage.setItem('token', response.headers['authorization']);
-        console.log('Stored user data:', localStorage.getItem('user')); // Log du stockage
-
-        // Redirection basée sur le rôle
-        switch (data.role) {
+      //const data = await login(username, password);
+      const currentUser = getCurrentUser();
+      console.log('Current User:', currentUser); // Add this line to see what is retrieved
+      console.log('User ID:', currentUser?.id); // Safely access id to avoid potential undefined errors
+      
+      if (currentUser && currentUser.role) {
+        switch (currentUser.role) {
           case 'RH':
             navigate('/rh');
             break;
@@ -37,10 +33,10 @@ const Login = () => {
             navigate('/stagiaire');
             break;
           default:
-            navigate('/login');
+            navigate('/dashboard');
         }
       }
-    } catch (err) {
+    }catch (err) {
       console.error('Login error:', err); // Log des erreurs
       setError('Invalid username or password');
     }

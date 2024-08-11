@@ -1,32 +1,27 @@
+// services/authService.js
 import axios from 'axios';
 
-export const getCurrentUser = () => {
-  const user = localStorage.getItem('user');
-  return user ? JSON.parse(user) : null;
-};
+const API_URL = 'http://localhost:8080/api/';
 
 export const login = async (username, password) => {
-  try {
-    const response = await axios.post('http://localhost:8080/api/user/login', { username, password });
-    if (response.data) {
-      console.log('Login response data:', response.data); // Debugging line
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-      localStorage.setItem('userId', response.data.userId); // Store as string
-      localStorage.setItem('token', response.data.token); // Correctly store the token
-      console.log(localStorage.getItem('userId')); // Should log the userId
-
-    } else {
-      console.warn('Unexpected response structure:', response.data);
-    }
-    return response.data.user;
-  } catch (error) {
-    console.error('Login error:', error);
-    throw error;
+  const response = await axios.post(API_URL + 'user/login', { username, password });
+  console.log(response.data); // Log the response data to check if 'id' is present
+  if (response.data.token) {
+    // Store the token and user information, including the id, in local storage
+    localStorage.setItem('user', JSON.stringify({
+      token: response.data.token,
+      id: response.data.userId,
+      role: response.data.role,
+      // Store any other data you might need
+    }));
   }
+  return response.data;
 };
 
-export const logoutUser = () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('userId');
-  localStorage.removeItem('user'); // Optionally remove user data as well
+export const getCurrentUser = () => {
+  return JSON.parse(localStorage.getItem('user'));
+};
+
+export const logout = () => {
+  localStorage.removeItem('user');
 };

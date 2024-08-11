@@ -47,7 +47,7 @@ const OrderForm = ({ formData, setFormData, addOrder, deleteOrder}) => {
       </div>
       <div className="form-group">
         <label>Date de naissance</label>
-        <input type="date" name="date" value={formData.date} onChange={handleChange} />
+        <input type="text" name="date" value={formData.date} onChange={handleChange} />
       </div>
       <div className="form-group">
         <label>Departement</label>

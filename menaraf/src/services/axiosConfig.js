@@ -1,19 +1,21 @@
 import axios from 'axios';
+import { getCurrentUser } from './authService';
 
-// Créer une instance d'Axios avec la configuration par défaut
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8080/api', // Base URL de votre API backend
+  baseURL: 'http://localhost:8080/api',
   headers: {
     'Content-Type': 'application/json'
   }
 });
 
-// Ajouter un intercepteur de requêtes pour ajouter le token JWT
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`; // Ensure proper format
+    const currentUser = getCurrentUser();
+    if (currentUser && currentUser.token) {
+      config.headers['Authorization'] = `Bearer ${currentUser.token}`;
+      console.log('Authorization Header:', config.headers['Authorization']); // Debugging: Log the token
+    } else {
+      console.error('No token found');
     }
     return config;
   },
@@ -22,15 +24,16 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-
-// Method to create a new encadrant
 export const createOrder = (orderData, userId) => {
   return axiosInstance.post(`/rh/addencadrant/${userId}`, orderData);
 };
 
-// Method to update an existing encadrant
-export const updateOrder = (orderId,userId, orderData) => {
-  return axiosInstance.put(`/rh/updateencadrant/${userId}/${orderId}`, orderData);
+export const updateOrder = (username, userId, orderData) => {
+  return axiosInstance.put(`/rh/updateencadrant/${userId}/${username}`, orderData);
+};
+
+export const fetchOrders = (userId) => {
+  return axiosInstance.get(`/rh/encadrants/${userId}`);
 };
 
 export default axiosInstance;

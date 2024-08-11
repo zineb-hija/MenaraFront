@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import OrderList from './OrderList';
 import OrderForm from './OrderForm';
 import './EncadrantC.css';
-import { createOrder, updateOrder } from '../../services/axiosConfig';
+import { createOrder, fetchOrders, updateOrder } from '../../services/axiosConfig';
 import { getCurrentUser } from '../../services/authService';
 
 function EncadrantC() {
@@ -18,27 +18,48 @@ function EncadrantC() {
   });
   const [selectedOrder, setSelectedOrder] = useState(null);
 
-  const addOrder = async() => {
-    const userId = localStorage.getItem('userId'); // Retrieve as string
-    if (userId) {
-      // Optionally convert to number if needed
-      // const userIdNumber = parseInt(userId, 10);
-      console.log('User ID:', userId); // Check value
-    } else {
-      console.error('User ID is missing or invalid');
+  useEffect(() => {
+    const loadOrders = async () => {
+      const currentUser = getCurrentUser();
+    if (!currentUser) {
+      console.error('User not logged in');
+      return;
     }
+    const userId = currentUser.id;
+    console.log('Current User:', currentUser); // Debugging: Log current user info
+    console.log('User ID:', userId); // Debugging: Log the user ID being used
+    
+      try {
+        const response = await fetchOrders(userId); // Pass any filters if needed
+        console.log('Orders fetched:', response.data); // Debugging: Log the fetched orders
+        setOrders(response.data); // Assuming the API response contains the list of orders
+      } catch (error) {
+        console.error('Error fetching order:', error.response ? error.response.data : error.message);
+      }
+    };
+
+    loadOrders();
+  }, []);
+
+  const addOrder = async() => {
+    const currentUser = getCurrentUser();
+    if (!currentUser) {
+      console.error('User not logged in');
+      return;
+    }
+    const userId = currentUser.id;
+
     try {
       if (selectedOrder) {
-        await updateOrder(selectedOrder.id, userId, formData);
+        const username = selectedOrder.username;
+        await updateOrder(username, userId, formData);
         setOrders(orders.map(order => order === selectedOrder ? formData : order));
         setSelectedOrder(null);
-
       } else {
-        // For adding a new order
         const response = await createOrder(formData, userId);
         setOrders([...orders, response.data]); 
       }
-  
+
       setFormData({
         date: '',
         nom: '',
@@ -53,8 +74,17 @@ function EncadrantC() {
     }
   };
 
+
   const handleRowClick = (order) => {
-    setFormData(order);
+    setFormData({
+      date: order.date || '',
+      nom: order.nom || '',
+      prenom: order.prenom || '',
+      password: order.password || '',  // Ensure password is always defined
+      username: order.username || '',
+      email: order.email || '',
+      departement: order.departement || ''
+    });
     setSelectedOrder(order);
   };
 
